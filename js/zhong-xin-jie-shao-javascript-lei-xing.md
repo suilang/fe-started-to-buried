@@ -200,11 +200,32 @@ String其实是 JavaScript 对象。你可以像  [object](https://developer.moz
 
 布尔表示一个逻辑实体，可以有两个值：`true` 和 `false`。
 
+根据具体需要，JavaScript 按照如下规则将变量转换成布尔类型：
+
+1. `false`、`0`、空字符串（`""`）、`NaN`、`null` 和 `undefined` 被转换为 `false`
+2. 所有其他值被转换为 `true`
+
+> 小提示：在做双等==逻辑时，2==true 是会返回false的，因为boolean类型被转换为数字1，然后再做比较
+
 ### Undefined 类型
 
-一个没有被赋值的变量会有个默认值 `undefined。`
+一个没有被赋值的变量会有个默认值 `undefined。`undefined是一个不能被配置（non-configurable），不能被重写（non-writable）的属性。
 
+* 一个没有被赋值的变量的类型是undefined。
+* 一个函数如果没有使用return语句指定[`返回`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/return)值，就会返回一个undefined值。
 
+使用undefined和严格相等或不相等操作符来决定一个变量是否拥有值。但是如果你不知道这个值是否声明过，例如试图使用全局变量中的属性，建议使用[`typeof`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof)`,`它不会在一个变量没有被声明的时候抛出一个错误。
+
+```javascript
+// 这里没有声明y
+if(typeof y === 'undefined') {       // 没有错误，执行结果为true
+   console.log("y is " + typeof y )  // y is undefined
+}
+
+if(y === undefined) {                // ReferenceError: y is not defined
+
+}
+```
 
 ### Null 类型
 
@@ -214,7 +235,7 @@ Null 类型只有一个值： `null。`它是 JavaScript [基本类型](https://
 
 > 注意：`typeof null == "object"`
 
-在 API 中，`null` 常在返回类型应是一个对象但没有关联的值的地方使用。
+`null` 常在返回类型应是一个对象但没有关联的值的地方使用。
 
 ```javascript
 // foo 不存在，它从来没有被定义过或者是初始化过：
@@ -243,11 +264,95 @@ isNaN(1 + null) // false
 isNaN(1 + undefined) // true
 ```
 
-更多详情可查看 [`null`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null) 和 [Null](https://developer.mozilla.org/zh-CN/docs/Glossary/Null) 。
-
 ### 符号类型
 
 符号\(Symbols\)是ECMAScript 第6版新定义的。符号类型是唯一的并且是不可修改的, 并且也可以用来作为Object的key的值\(如下\). 在某些语言当中也有类似的原子类型\(Atoms\). 你也可以认为为它们是C里面的枚举类型. 更多细节请看 [Symbol](https://developer.mozilla.org/zh-CN/docs/Glossary/Symbol) 和 [`Symbol`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol) 。
+
+`Symbol()`函数会返回**symbol**类型的值，该类型具有静态属性和静态方法。每个从`Symbol()`返回的symbol值都是唯一的。一个symbol值能作为对象属性的标识符；这是该数据类型仅有的**目的**。
+
+
+
+### 对象 <a id="&#x5BF9;&#x8C61;"></a>
+
+JavaScript 中的对象，Object，可以简单理解成“名称-值”对（而不是键值对，ES 2015 的映射表（Map），比对象更接近键值对））
+
+“名称”部分是一个 **JavaScript 字符串**，“值”部分可以是任何 JavaScript 的数据类型——包括对象。
+
+有两种简单方法可以创建一个空对象：
+
+```javascript
+var obj = new Object();
+var obj = {};
+```
+
+这两种方法在语义上是相同的。第二种更方便的方法叫作“对象字面量（object literal）”法。
+
+“对象字面量”也可以用来在对象实例中定义一个对象：
+
+```javascript
+var obj = {
+    name: "Carrot",
+    "for": "Max",//'for' 是保留字之一，使用'_for'代替
+    details: {
+        color: "orange",
+        size: 12
+    }
+}
+```
+
+对象的属性可以通过链式（chain）表示方法进行访问：
+
+```javascript
+obj.details.color; // orange
+obj["details"]["size"]; // 12
+```
+
+> 注意：若'名称'不包含中划线之类的字符，推荐使用第一种`object.key`来调用
+>
+> 若key未知或需要通过参数传递进来，则使用第二种`object[key]`来调用，下面会说明原因
+
+下面的例子创建了一个对象原型，**`Person`**，和这个原型的实例，**`You`**。
+
+```javascript
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+// 定义一个对象
+var You = new Person("You", 24); 
+// 我们创建了一个新的 Person，名称是 "You" 
+// ("You" 是第一个参数, 24 是第二个参数..)
+```
+
+完成创建后，对象属性可以通过如下两种方式进行赋值和访问：
+
+```text
+obj.name = "Simon"
+var name = obj.name;
+```
+
+和：
+
+```javascript
+// bracket notation
+obj['name'] = 'Simon';
+var name = obj['name'];
+// can use a variable to define a key
+var user = prompt('what is your key?')
+obj[user] = prompt('what is its value?')
+```
+
+这两种方法在语义上也是相同的。第二种方法的优点在于属性的名称被看作一个字符串，这就意味着它可以在运行时被计算，缺点在于这样的代码有可能无法在后期被解释器优化。它也可以被用来访问某些以[预留关键字](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords)作为名称的属性的值：
+
+```javascript
+obj.for = "Simon"; // 语法错误，因为 for 是一个预留关键字
+obj["for"] = "Simon"; // 工作正常
+```
+
+
+
+### 
 
 
 
