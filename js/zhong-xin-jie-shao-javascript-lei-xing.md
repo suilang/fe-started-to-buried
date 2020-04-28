@@ -625,8 +625,6 @@ Person.prototype.fullNameReversed = function() {
 
 > 参考文档：
 
-
-
 > 重新介绍javascript：[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/A\_re-introduction\_to\_JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
 
 > JavaScript 数据类型和数据结构: [https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data\_structures](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures)
