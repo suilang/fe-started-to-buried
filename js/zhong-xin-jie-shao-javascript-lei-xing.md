@@ -266,11 +266,52 @@ isNaN(1 + undefined) // true
 
 ### 符号类型
 
-符号\(Symbols\)是ECMAScript 第6版新定义的。符号类型是唯一的并且是不可修改的, 并且也可以用来作为Object的key的值\(如下\). 在某些语言当中也有类似的原子类型\(Atoms\). 你也可以认为为它们是C里面的枚举类型. 更多细节请看 [Symbol](https://developer.mozilla.org/zh-CN/docs/Glossary/Symbol) 和 [`Symbol`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol) 。
+符号\(Symbols\)是ECMAScript 第6版新定义的。符号类型是唯一的并且是不可修改的。
 
 `Symbol()`函数会返回**symbol**类型的值，该类型具有静态属性和静态方法。每个从`Symbol()`返回的symbol值都是唯一的。一个symbol值能作为对象属性的标识符；这是该数据类型仅有的**目的**。
 
+> 不支持 `var sym = new Symbol(); // TypeError`
 
+```javascript
+const symbol1 = Symbol();
+const symbol2 = Symbol(42);
+const symbol3 = Symbol('foo');
+
+console.log(typeof symbol1);
+// expected output: "symbol"
+
+console.log(symbol3.toString());
+// expected output: "Symbol(foo)"
+
+console.log(Symbol('foo') === Symbol('foo'));
+// expected output: false
+```
+
+> `Symbol`函数的参数是可选的，字符串类型。是对symbol的描述，可用于调试但不是访问symbol本身。
+
+再次强调，Symbol类型唯一合理的用法是用变量存储 symbol的值，然后使用存储的值创建对象属性。
+
+```javascript
+var  myPrivateMethod  = Symbol();
+this[myPrivateMethod] = function() {...};
+```
+
+当一个 symbol 类型的值在属性赋值语句中被用作标识符，
+
+* 该属性是匿名的；并且是不可枚举的。因为这个属性是不可枚举的，
+* 它不会在循环结构 “`for( ... in ...)`” 中作为成员出现，也因为这个属性是匿名的，它同样不会出现在 “`Object.getOwnPropertyNames()`” 的返回数组里。
+* 这个属性可以通过创建时的原始 symbol 值访问到，或者通过遍历 “`Object.getOwnPropertySymbols()`” 返回的数组。
+* 通过保存在变量 `myPrivateMethod`的值可以访问到对象属性。
+* 当使用 JSON.stringify\(\) 时，以 symbol 值作为键的属性会被完全忽略：
+
+ [`typeof`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof)运算符能帮助你识别 symbol 类型
+
+```javascript
+typeof Symbol() === 'symbol'
+typeof Symbol('foo') === 'symbol'
+```
+
+###  <a id="&#x5BF9;&#x8C61;"></a>
 
 ### 对象 <a id="&#x5BF9;&#x8C61;"></a>
 
@@ -327,7 +368,7 @@ var You = new Person("You", 24);
 
 完成创建后，对象属性可以通过如下两种方式进行赋值和访问：
 
-```text
+```javascript
 obj.name = "Simon"
 var name = obj.name;
 ```
@@ -350,13 +391,245 @@ obj.for = "Simon"; // 语法错误，因为 for 是一个预留关键字
 obj["for"] = "Simon"; // 工作正常
 ```
 
+### 数组 <a id="&#x6570;&#x7EC4;"></a>
+
+JavaScript 中的数组是一种特殊的对象。它的工作原理与普通对象类似（以数字为属性名，但只能通过`[]` 来访问），但数组还有一个特殊的属性——`length`（长度）属性。这个属性的值通常比数组**最大索引**大 1。
+
+注意，`Array.length` 并不总是等于数组中元素的个数，如下所示：
+
+```javascript
+var a = ["dog", "cat", "hen"];
+a[100] = "fox";
+a.length; // 101
+```
+
+如果试图访问一个不存在的数组索引，会得到 `undefined`：
+
+```javascript
+typeof(a[90]); // undefined
+```
+
+ES2015 引入了更加简洁的 [`for`...`of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) 循环，可以用它来遍历可迭代对象，例如数组：
+
+```javascript
+for (const currentValue of a) {
+  // Do something with currentValue
+}
+```
+
+> 不推荐使用 [`for...in`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in) 循环，该方法遍历数组的索引。如果哪个家伙直接向 `Array.prototype` 添加了新的属性，使用这样的循环这些属性也同样会被遍历
+
+ECMAScript 5 增加了另一个遍历数组的方法，[`forEach()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)：
+
+```javascript
+["dog", "cat", "hen"].forEach(function(currentValue, index, array) {
+  // Do something with currentValue or array[index]
+});
+```
+
+> 若部分遍历，还可以考虑`some(), every()`等方法，建议查看 [Array 方法的完整文档](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)。
+
+### 函数 <a id="&#x51FD;&#x6570;"></a>
+
+最简单的函数就像下面这个这么简单：
+
+```javascript
+function add(x, y) {
+    var total = x + y;
+    return total;
+}
+```
+
+* 一个 JavaScript 函数可以包含 0 个或多个已命名的变量。
+* 函数体中的表达式数量也没有限制。你可以声明函数自己的局部变量。
+* `return` 语句在返回一个值并结束函数。如果没有使用 `return` 语句，或者一个没有值的 `return` 语句，JavaScript 会返回 `undefined`。
+
+你可以传入多于函数本身需要参数个数的参数，只是多余的参数会被忽略。
+
+函数实际上是访问了函数体中一个名为 [`arguments`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions_and_function_scope/arguments) 的内部对象，这个对象就如同一个**类似于数组**的对象一样，包括了所有被传入的参数。
+
+```javascript
+function add() {
+    var sum = 0;
+    for (var i = 0, j = arguments.length; i < j; i++) {
+        sum += arguments[i];
+    }
+    return sum;
+}
+
+add(2, 3, 4, 5); // 14
+```
+
+为了使代码变短一些，我们可以使用[剩余参数](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Rest_parameters)来替换arguments的使用。
+
+```javascript
+function avg(...args) {
+  var sum = 0;
+  for (let value of args) {
+    sum += value;
+  }
+  return sum / args.length;
+}
+
+avg(2, 3, 4, 5); // 3.5
+```
+
+> 无论“剩余参数操作符”被放置到函数声明的哪里，它都会把除了自己之前的所有参数存储起来。
+>
+> 通常不建议使用该特性，会导致传参意义不明确
 
 
-### 
+
+JavaScript 允许以递归方式调用函数。递归在处理树形结构（比如浏览器 [DOM](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model)）时非常有用。
+
+```javascript
+function countChars(elm) {
+    if (elm.nodeType == 3) { // TEXT_NODE 文本节点
+        return elm.nodeValue.length;
+    }
+    var count = 0;
+    for (var i = 0, child; child = elm.childNodes[i]; i++) {
+        count += countChars(child);
+    }
+    return count;
+}
+```
+
+你可以命名立即调用的函数表达式（IIFE——Immediately Invoked Function Expression），如下所示：
+
+```javascript
+var charsInBody = (function counter(elm) {
+    if (elm.nodeType == 3) { // 文本节点
+        return elm.nodeValue.length;
+    }
+    var count = 0;
+    for (var i = 0, child; child = elm.childNodes[i]; i++) {
+        count += counter(child);
+    }
+    return count;
+})(document.body);
+```
+
+如上所提供的函数表达式的名称的作用域仅仅是该函数自身。这允许引擎去做更多的优化，并且这种实现更可读、友好。
+
+### 自定义对象 <a id="&#x81EA;&#x5B9A;&#x4E49;&#x5BF9;&#x8C61;"></a>
+
+让我们来定义一个人名对象，这个对象包括人的姓和名两个域（field）。名字的表示有两种方法：“名 姓（First Last）”或“姓, 名（Last, First）”。
+
+```javascript
+function makePerson(first, last) {
+    return {
+        first: first,
+        last: last
+    }
+}
+function personFullName(person) {
+    return person.first + ' ' + person.last;
+}
+function personFullNameReversed(person) {
+    return person.last + ', ' + person.first
+}
+s = makePerson("Simon", "Willison");
+personFullName(s); // Simon Willison
+personFullNameReversed(s); // Willison, Simon
+```
+
+上面的写法虽然可以满足要求，但是看起来很麻烦，因为需要在全局命名空间中写很多函数。既然函数本身就是对象，如果需要使一个函数隶属于一个对象，那么不难得到：
+
+```javascript
+function makePerson(first, last) {
+    return {
+        first: first,
+        last: last,
+        fullName: function() {
+            return this.first + ' ' + this.last;
+        },
+        fullNameReversed: function() {
+            return this.last + ', ' + this.first;
+        }
+    }
+}
+s = makePerson("Simon", "Willison");
+s.fullName(); // Simon Willison
+s.fullNameReversed(); // Willison, Simon
+```
+
+当使用函数时，函数内`this` 指代当前的对象，也就是调用了函数的对象。如果在一个对象上使用[点或者方括号](https://developer.mozilla.org/en/JavaScript/Reference/Operators/Member_Operators)来访问属性或方法，这个对象就成了 `this`。如果并没有使用“点”运算符调用某个对象，那么 `this` 将指向全局对象（global object）。这是一个经常出错的地方。例如：
+
+```javascript
+s = makePerson("Simon", "Willison");
+var fullName = s.fullName;
+fullName(); // undefined undefined
+```
+
+下面使用关键字 `this` 改进已有的 `makePerson`函数：
+
+```javascript
+function Person(first, last) {
+    this.first = first;
+    this.last = last;
+    this.fullName = function() {
+        return this.first + ' ' + this.last;
+    }
+    this.fullNameReversed = function() {
+        return this.last + ', ' + this.first;
+    }
+}
+var s = new Person("Simon", "Willison");
+```
+
+`new` 关键字将生成的 `this` 对象返回给调用方，而被 `new` 调用的函数称为构造函数。习惯的做法是将这些函数的首字母大写，这样用 `new` 调用他们的时候就容易识别了。
+
+下面是一个 `new` 方法的简单实现：
+
+```javascript
+function trivialNew(constructor, ...args) {
+    var o = {}; // 创建一个对象
+    constructor.apply(o, args);
+    return o;
+}
+```
+
+> 这并不是 `new` 的完整实现，因为它没有创建原型（prototype）链。
+
+每次我们创建一个 Person 对象的时候，我们都在其中创建了两个新的函数对象，下面使用原型链进行优化。
+
+`Person.prototype` 是一个可以被`Person`的所有实例共享的对象。它是一个名叫原型链（prototype chain）的查询链的一部分：当你试图访问一个 `Person` 没有定义的属性时，解释器会首先检查这个 `Person.prototype` 来判断是否存在这样一个属性。所以，任何分配给 `Person.prototype` 的东西对通过 `this` 对象构造的实例都是可用的。
+
+```javascript
+function Person(first, last) {
+    this.first = first;
+    this.last = last;
+}
+Person.prototype.fullName = function() {
+    return this.first + ' ' + this.last;
+}
+Person.prototype.fullNameReversed = function() {
+    return this.last + ', ' + this.first;
+}
+```
+
+> JavaScript 允许你在程序中的任何时候修改原型（prototype）中的一些东西，也就是说你可以在运行时\(runtime\)给已存在的对象添加额外的方法
+>
+> 关于原型链更多内容，可参见[继承与原型链](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+
+
+
+
+
+
+
+
 
 
 
 > 参考文档：
->
+
+
+
 > 重新介绍javascript：[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/A\_re-introduction\_to\_JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
+
+> JavaScript 数据类型和数据结构: [https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data\_structures](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures)
+
+
 
