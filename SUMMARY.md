@@ -9,4 +9,5 @@
 ## js
 
 * [重新介绍javascript--类型](js/zhong-xin-jie-shao-javascript-lei-xing.md)
+* [初学者不容错过的双等\(==\)知识点](js/chu-xue-zhe-bu-rong-cuo-guo-de-shuang-deng-zhi-shi-dian.md)
 
