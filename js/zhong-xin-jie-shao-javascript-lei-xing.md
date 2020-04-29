@@ -613,6 +613,60 @@ Person.prototype.fullNameReversed = function() {
 >
 > 关于原型链更多内容，可参见[继承与原型链](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
 
+\*\*\*\*
+
+**最后附上对象及其衍生类型的一些判断方式**
+
+判断数组
+
+* `Array.isArray()`
+* `[] instanceof Array`判断是否在Array的原型链上
+* `[].constructor === Array`通过其构造函数判断
+* `Object.prototype.toString.call([])`判断值是否为'\[object Array\]'
+
+```javascript
+const arr = [1, 2, 3];
+
+Array.isArray(arr); // true
+arr instanceof Array; // true
+arr.constructor === Array; // true
+Object.prototype.toString.call(arr); // "[object Array]"
+```
+
+判断对象
+
+* `{} instanceof Object`判断是否在Object的原型链上
+* `{}.constructor === Object`通过其构造函数判断
+* `Object.prototype.toString.call({})， 值为`'\[object Object\]'
+
+```javascript
+const obj = {};
+
+obj instanceof Object; // true
+obj.constructor === Object; // true
+Object.prototype.toString.call(obj); // "[object Object]"
+```
+
+判断函数
+
+* `func typeof function`
+* `func instanceof Function`判断是否在`Function`的原型链上
+* `func.constructor === Function`通过构造函数判断
+* `Object.prototype.toString.call(func)`值为 "\[object Function\]"
+
+```javascript
+function func() {}
+
+typeof(func); // function
+func instanceof Function; // true
+func.constructor === Function; // true
+Object.prototype.toString.call(func); // "[object Function]"
+```
+
+
+
+
+
 
 
 
