@@ -20,7 +20,7 @@
 
 上图说话：
 
-![](.gitbook/assets/image%20%282%29.png)
+![](../.gitbook/assets/image%20%282%29.png)
 
 ```javascript
 // 定义引用类型 refObj1
@@ -72,7 +72,7 @@ CopiedObj.refObj1; // [999, 2, 3]; 受到影响
 
 上图说话
 
-![](.gitbook/assets/image%20%283%29.png)
+![](../.gitbook/assets/image%20%283%29.png)
 
 深拷贝实现方式
 
