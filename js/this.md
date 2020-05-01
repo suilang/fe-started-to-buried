@@ -229,12 +229,9 @@ const f = new foo() // foo实例 window
 
 异步任务中简单调用的函数都是进入队列，最后由全局环境调用
 
-  
-
-
 ## 箭头函数
 
-在[箭头函数](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions)中，`this`与封闭词法环境的`this`保持一致。
+在箭头函数中，`this`与封闭词法环境的`this`保持一致。
 
 ### 全局环境中
 
@@ -418,5 +415,7 @@ console.log(test.call(o1)) // 15
 
 > 参考文档：
 >
-> this
+> [this](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/this)
+>
+> [箭头函数](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
