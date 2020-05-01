@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Initial page](README.md)
+* [写在前面](README.md)
 
 ## html
 
@@ -12,4 +12,6 @@
 * [初学者不容错过的双等\(==\)知识点](js/chu-xue-zhe-bu-rong-cuo-guo-de-shuang-deng-zhi-shi-dian.md)
 * [clone：你是浅还是深](js/untitled.md)
 * [继承与原型链](js/ji-cheng-yu-yuan-xing.md)
+* [this及箭头函数](js/this.md)
+* [Untitled](js/untitled-1.md)
 
