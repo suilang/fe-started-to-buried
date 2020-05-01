@@ -182,9 +182,9 @@ for(var i=0 ; i<elements.length ; i++){
 
 ### 嵌套函数
 
-```javascript
-// 嵌套函数内部this与调用函数所在环境的this无关
+嵌套函数内部this与调用函数所在环境的this无关
 
+```javascript
 function foo() {
   console.log(this) 
   function boo() {
@@ -199,6 +199,38 @@ foo() // window window
 // new 对象
 const f = new foo() // foo实例 window
 ```
+
+这里我个人的理解是：
+
+函数内部直接声明的函数，与var声明的变量一样，有一个作用域的提升，相当于在全局环境下声明了一个函数，然后在本函数调用，因为没有显式指定调用对象，所以内部this指向全局。
+
+相当于下面代码：
+
+```javascript
+function boo() {
+    console.log(this) 
+}
+  
+function foo() {
+  console.log(this) 
+  boo()
+}
+
+// 直接调用
+foo() // window window
+
+// new 对象
+const f = new foo() // foo实例 window
+```
+
+### 定时器与微任务
+
+微任务中的简单调用的函数this指向window严格下指向undefined，而**定时器中的回调函数不管在严格还是非严格环境下this永远指向window**，
+
+异步任务中简单调用的函数都是进入队列，最后由全局环境调用
+
+  
+
 
 ## 箭头函数
 
