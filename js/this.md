@@ -180,6 +180,26 @@ for(var i=0 ; i<elements.length ; i++){
 }
 ```
 
+### 嵌套函数
+
+```javascript
+// 嵌套函数内部this与调用函数所在环境的this无关
+
+function foo() {
+  console.log(this) 
+  function boo() {
+    console.log(this) 
+  }
+  boo()
+}
+
+// 直接调用
+foo() // window window
+
+// new 对象
+const f = new foo() // foo实例 window
+```
+
 ## 箭头函数
 
 在[箭头函数](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions)中，`this`与封闭词法环境的`this`保持一致。
@@ -363,4 +383,8 @@ console.log(test.call(o1)) // 15
 现在你明白this会指向哪里了么？
 
 > 如果你收获了新知识，请给作者点个赞吧～
+
+> 参考文档：
+>
+> this
 
