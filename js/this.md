@@ -35,7 +35,9 @@ console.log(b)         // "MDN"
 
 ### 简单调用
 
-在非严格模式下，直接在全局作用域下调用函数， `this` 的值不是由该调用设置的，所以 `this` 的值默认指向全局对象。
+在非严格模式下，直接在全局作用域下调用函数， 且`this` 的值不是由该调用设置的，所以 `this` 的值默认指向全局对象。
+
+> 如果函数名前没有加任何东西，那么默认为**简单调用**，
 
 ```javascript
 function f1(){
@@ -200,28 +202,9 @@ foo() // window window
 const f = new foo() // foo实例 window
 ```
 
-这里我个人的理解是：
+这里我个人的理解是：因为没有显式指定调用对象，所以内部this指向全局。
 
-函数内部直接声明的函数，与var声明的变量一样，有一个作用域的提升，相当于在全局环境下声明了一个函数，然后在本函数调用，因为没有显式指定调用对象，所以内部this指向全局。
 
-相当于下面代码：
-
-```javascript
-function boo() {
-    console.log(this) 
-}
-  
-function foo() {
-  console.log(this) 
-  boo()
-}
-
-// 直接调用
-foo() // window window
-
-// new 对象
-const f = new foo() // foo实例 window
-```
 
 ### 定时器与微任务
 
