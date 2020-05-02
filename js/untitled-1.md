@@ -1,6 +1,6 @@
-# Untitled
+# apply、call、bind的区别与精简实现
 
-### apply、call、bind的区别与实现
+### 
 
 **`apply()`** 方法接收一个指定的`this`值和一个**包含多个参数的数组**来调用一个函数。
 
