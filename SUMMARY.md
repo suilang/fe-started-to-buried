@@ -14,4 +14,5 @@
 * [继承与原型链](js/ji-cheng-yu-yuan-xing.md)
 * [this及箭头函数](js/this.md)
 * [apply、call、bind的区别与精简实现](js/untitled-1.md)
+* [词法作用域及作用域链](js/ci-fa-zuo-yong-yu-ji-zuo-yong-yu-lian.md)
 
