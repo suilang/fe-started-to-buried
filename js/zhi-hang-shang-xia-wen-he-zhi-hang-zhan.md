@@ -178,7 +178,7 @@ FunctionLexicalEnvironment = {
 
 在创建执行上下文时，js引擎会检查当前作用域的所有变量声明及函数声明，在执行之前，var声明的变量已经绑定初始undefined，而在let和const只绑定在了执行上下文中，但并未初始任何值，所以在声明之前调用则会抛出引用错误\(即TDZ暂时性死区\)，这也就是函数声明与var声明在执行上下文中的提升。
 
-> let/const也存在变量提升现象，详情移至
+> let/const也存在变量提升现象，详情移至[你可能不知道的变量提升](https://juejin.im/post/5eafd3e06fb9a043661f7cce)
 
 
 
