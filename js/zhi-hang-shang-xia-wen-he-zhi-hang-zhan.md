@@ -188,7 +188,53 @@ FunctionLexicalEnvironment = {
 
 > 在执行阶段，如果 JavaScript 引擎不能在源码中声明变量的实际位置找到 `let` 变量的值，它会被赋值为 `undefined`。
 
+最后，看一个《JavaScript权威指南》中的例子：
 
+```javascript
+var scope = "global scope";
+function checkscope(){
+    var scope = "local scope";
+    function f(){
+        return scope;
+    }
+    return f();
+}
+checkscope();
+```
+
+```javascript
+var scope = "global scope";
+function checkscope(){
+    var scope = "local scope";
+    function f(){
+        return scope;
+    }
+    return f;
+}
+checkscope()();
+```
+
+> 两段代码执行的结果一样，都是`local scope，`若不理解，请移步[词法作用域及作用域链讲解](https://juejin.im/post/5eae96066fb9a043867d4dd0)
+
+但是两段代码究竟有哪些不同呢？
+
+模拟第一段代码：
+
+```javascript
+ECStack.push(<checkscope> functionContext);
+ECStack.push(<f> functionContext);
+ECStack.pop();
+ECStack.pop();
+```
+
+模拟第二段代码：
+
+```javascript
+ECStack.push(<checkscope> functionContext);
+ECStack.pop();
+ECStack.push(<f> functionContext);
+ECStack.pop();
+```
 
 
 
