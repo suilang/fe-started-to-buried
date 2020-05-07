@@ -19,5 +19,5 @@
 * [执行上下文和执行栈](js/zhi-hang-shang-xia-wen-he-zhi-hang-zhan.md)
 * [词法作用域及作用域链](js/ci-fa-zuo-yong-yu-ji-zuo-yong-yu-lian.md)
 * [简单的闭包介绍](js/jian-dan-de-bi-bao-jie-shao.md)
-* [事件机制](js/shi-jian-ji-zhi.md)
+* [事件机制/](js/shi-jian-ji-zhi.md)
 
