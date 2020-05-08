@@ -62,7 +62,9 @@ microtask 队列和task 队列有些相似，都是先进先出的队列，由�
 
 > 执行完`microtask`队列里的任务，有**可能**会渲染更新。（浏览器很聪明，在一帧以内的多次dom变动浏览器不会立即响应，而是会积攒变动以最高60HZ的频率更新视图）
 
-![](../.gitbook/assets/image.png)
+![](../.gitbook/assets/image%20%285%29.png)
+
+
 
 ### setTimeout
 
