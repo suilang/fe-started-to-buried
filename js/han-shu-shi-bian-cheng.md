@@ -279,6 +279,7 @@ var trace = curry(function(tag, x){
 1. **性能**：函数式编程相往往会对一个方法进行过度包装，从而产生上下文切换的性能开销。同时，在 JS 这种非函数式语言中，函数式的方式必然会比直接写语句指令慢（引擎会针对很多指令做特别优化）。
 2.  **资源占用**：在 JS 中为了实现对象状态的不可变，往往会创建新的对象，因此，它对垃圾回收（Garbage Collection）所产生的压力远远超过其他编程方式。这在某些场合会产生十分严重的问题。
 3. **递归陷阱**：在函数式编程中，为了实现迭代，通常会采用递归操作，为了减少递归的性能开销，我们往往会把递归写成尾递归形式，以便让解析器进行优化。但是众所周知，JS 是不支持尾递归优化的.
+4. **代码不易读**。特别熟悉FP的人可能会觉得这段代码一目了然。而不熟悉的人，遇到写的晦涩的代码，看懂代码，得脑子里先演算半小时。
 
 > 前端领域，我们能看到很多函数式编程的影子：ES6 中加入了箭头函数，Redux 引入 Elm 思路降低 Flux 的复杂性，React16.6 开始推出 React.memo\(\)，使得 pure functional components 成为可能，16.8 开始主推 Hook，建议使用 pure function 进行组件编写……
 
@@ -297,7 +298,8 @@ var trace = curry(function(tag, x){
 参考文档：
 
 1. \*\*\*\*[**JavaScript函数式编程**](https://github.com/ecmadao/Coding-Guide/blob/master/Notes/JavaScript/JavaScript%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B.md)\*\*\*\*
-2. \*\*\*\*
+2. \*\*\*\*[**JavaScript 函数式编程到底是个啥**](https://segmentfault.com/a/1190000009864459)\*\*\*\*
+3. \*\*\*\*[**函数式编程指北**](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)\*\*\*\*
 
 
 
