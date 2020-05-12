@@ -1,7 +1,7 @@
 # Table of contents
 
 * [写在前面](README.md)
-* [送给初学者的面试用鱼竿](song-gei-chu-xue-zhe-de-mian-shi-yong-yu-gan.md)
+* [js从入门到入职](song-gei-chu-xue-zhe-de-mian-shi-yong-yu-gan.md)
 
 ## html
 
@@ -21,4 +21,5 @@
 * [简单的闭包介绍](js/jian-dan-de-bi-bao-jie-shao.md)
 * [事件机制/](js/shi-jian-ji-zhi.md)
 * [函数式编程](js/han-shu-shi-bian-cheng.md)
+* [web worker](js/web-worker.md)
 
