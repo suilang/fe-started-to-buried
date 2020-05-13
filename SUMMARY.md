@@ -1,7 +1,7 @@
 # Table of contents
 
 * [写在前面](README.md)
-* [js从入门到入职](song-gei-chu-xue-zhe-de-mian-shi-yong-yu-gan.md)
+* [目录](song-gei-chu-xue-zhe-de-mian-shi-yong-yu-gan.md)
 
 ## html
 
