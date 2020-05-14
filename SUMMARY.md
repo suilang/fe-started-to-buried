@@ -22,6 +22,7 @@
 * [事件机制/](js/shi-jian-ji-zhi.md)
 * [函数式编程](js/han-shu-shi-bian-cheng.md)
 * [web worker](js/web-worker.md)
+* [server](js/server.md)
 
 ## css
 
