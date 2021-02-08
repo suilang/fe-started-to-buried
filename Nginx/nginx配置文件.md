@@ -123,7 +123,8 @@ send_timeout 60s;
 **sendfile**
 传统文件传输, 在实现上其实是比较复杂的, 其具体流程细节如下：
 
-> 1.调用read函数，文件数据被复制到内核缓冲区2.read函数返回，文件数据从内核缓冲区复制到用户缓冲区
+> 1.调用read函数，文件数据被复制到内核缓冲区
+> 2.read函数返回，文件数据从内核缓冲区复制到用户缓冲区
 > 3.write函数调用，将文件数据从用户缓冲区复制到内核与socket相关的缓冲区。
 > 4.数据从socket缓冲区复制到相关协议引擎。
 > 传统文件传输数据实际上是经过了四次复制操作:
@@ -469,7 +470,7 @@ upstream backend {
     server backend2.example.com:8080;
     server backup1.example.com:8080   backup;
     server backup2.example.com:8080   backup;
-    
+   
     # 长链接设置
     keepalive 100;
 }
@@ -482,7 +483,7 @@ upstream backend {
 - ip_hash：每个请求按访问IP的hash结果分配，这样来自同一个IP的固定访问一个后端服务器，主要解决动态网站session共享的问题。
 - url_hash：按照访问的URL的hash结果来分配请求，是每个URL定向到同一个后端服务器，可以进一步提高后端缓存服务器的效率，nginx本身不支持，如果想使用需要安装nginx的hash软件包。
 - fair：这个算法可以依据页面大小和加载时间长短智能的进行负载均衡，也就是根据后端服务器的响应时间来分配请求，相应时间短的优先分配，默认不支持，如果想使用需要安装upstream_fail模块。
-- least_conn：最少链接数，那个机器连接数少就分发。
+- least_conn：最少链接数，哪个机器连接数少就分发。
 
 
 
@@ -497,7 +498,7 @@ server指令指定后端服务器IP地址和端口，同时还可以设定每个
 - max_fails 允许请求失败的次数，默认是1，当超过最大次数时，返回proxy_next_upstream模块定义的错误。0表示禁止失败尝试，企业场景：2-3.根据业务需求去配置。
 - fail_timeout，在经历了max_fails次失败后，暂停服务的时间。根据业务需求配置。常规业务2-3秒合理。
 
-### location 模块解读
+### location 模块
 
 作用：基于一个指令设置URI。
 
@@ -519,9 +520,81 @@ Context:    server, location
 
 > 匹配是有优先级的，不是按照nginx的配置文件进行。
 
-首先精确匹配 =，其次匹配^~（匹配固定字符串，忽略正则），然后是按文件中顺序的正则匹配，最后是交给 / 通用匹配。
+nginx首先检查使用前缀字符串定义的位置(前缀位置)，选择并记住匹配前缀最长的位置。然后按照正则表达式在配置文件中出现的顺序检查正则表达式。正则表达式的搜索在第一个匹配时终止，并使用相应的配置。如果没有找到与正则表达式的匹配，则使用前面记住的前缀位置配置。
 
-当有匹配成功时候，停止匹配，按当前匹配规则处理请求。
+如果最长的匹配前缀位置有“^~”修饰符，则不检查正则表达式
+
+另外，使用" = "修饰符可以定义URI和位置的精确匹配。如果找到了精确的匹配，搜索将终止。例如，如果“/”请求频繁发生，定义“location = /”将加速处理这些请求，因为搜索在第一次比较之后立即终止。
+
+> 如果一个位置是由一个以斜杠字符结尾的前缀字符串定义的，并且请求由proxy_pass、fastcgi_pass、uwsgi_pass、scgi_pass、memcached_pass或grpc_pass处理，则执行特殊的处理。对于URI等于此字符串但不带斜杠的请求的响应，一个带有代码301的永久重定向将被返回到所请求的URI，并附加斜杠。
+
+Location区段匹配示例
+```
+location = / {
+　　# 只匹配 / 的查询.
+　　[ configuration A ]
+}
+location / {
+　　# 匹配任何以 / 开始的查询，但是正则表达式与一些较长的字符串将被首先匹配。
+　　[ configuration B ]
+}
+location ^~ /images/ {
+　　# 匹配任何以 /images/ 开始的查询并且停止搜索，不检查正则表达式。
+　　[ configuration C ]
+}
+location ~* \.(gif|jpg|jpeg)$ {
+　　# 匹配任何以gif, jpg, or jpeg结尾的文件，但是所有 /images/ 目录的请求将在Configuration C中处理。
+　　[ configuration D ]
+} 
+```
+
+各请求的处理如下例：
+```
+■/ → configuration A
+■/documents/document.html → configuration B
+■/images/1.gif → configuration C
+■/documents/1.jpg → configuration D
+```
+
+示例二
+```
+location / {
+           return 401;
+        }
+location = / {
+    return 402;
+}
+location /documents/ {
+    return 403;
+}
+location ^~ /images/ {
+    return 404;
+}
+location ~* \.(gif|jpg|jpeg)$ {
+    return 500;
+}
+```
+
+结果
+```
+# curl -I -s -o /dev/null -w "%{http_code}\n" http://10.0.0.7/
+402
+
+# curl -I -s -o /dev/null -w "%{http_code}\n" http://10.0.0.7/index.html
+401
+
+# curl -I -s -o /dev/null -w "%{http_code}\n" http://10.0.0.7/documents/document.html 
+403
+
+# curl -I -s -o /dev/null -w "%{http_code}\n" http://10.0.0.7/images/1.gif
+404
+
+# curl -I -s -o /dev/null -w "%{http_code}\n" http://10.0.0.7/dddd/1.gif  
+500
+```
+
+**匹配的优先顺序:** `= > ^~（匹配固定字符串，忽略正则）> 完全相等 >~*>空>/` 。
+工作中尽量将'='放在前面
 
 #### alias与root的区别
 
@@ -548,6 +621,59 @@ location ^~ /tea/ {
 - 请求：http://test.com/tea/tea1.html
 - 实际访问：/usr/local/nginx/html/tea/tea1.html 文件
 
+alias后面必须要用“/”结束，否则会找不到文件的
+
+#### try_files
+
+```
+Syntax:	try_files file ... uri;
+				try_files file ... =code;
+```
+检查文件是否按指定顺序存在，并使用第一个找到的文件进行请求处理;处理在当前上下文中执行。文件的路径根据根指令和别名指令由file参数构造。可以通过在名称的末尾指定一个斜杠来检查目录是否存在，例如“$uri/”。
+
+如果没有找到任何文件，将进行内部重定向到最后一个参数中指定的uri。
+
+```
+location /images/ {
+    try_files $uri /images/default.gif;
+}
+
+location = /images/default.gif {
+    expires 30s;
+}
+```
+或者
+```
+location / {
+    try_files /system/maintenance.html
+              $uri $uri/index.html $uri.html
+              @mongrel;
+}
+
+location @mongrel {
+    proxy_pass http://mongrel;
+}
+```
+该配置可以配合 React的Browser路由模式，避免出现404， 示例如下
+```
+location /react {
+    alias /project/react/;
+    try_files $uri /react/index.html;
+  }
+```
+该方式也会存在缺点，只要/index.html存在，服务端就不会响应404，即使客户端请求了实际不存在的JS/CSS/图片文件。
+
+要使非HTML请求实际资源不存在时响应404，方法是：若请求的资源不是HTML，则放弃尝试后备文件。
+```
+location /react {
+    alias /project/react/;
+    set $fallback_file /index.html;
+    if ($http_accept !~ text/html) {
+        set $fallback_file $uri;
+    }
+    try_files $uri $fallback_file;
+  }
+```
 
 
 #### last 和 break关键字的区别
