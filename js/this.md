@@ -394,11 +394,10 @@ console.log(test.call(o1)) // 15
 
 现在你明白this会指向哪里了么？
 
-> 如果你收获了新知识，请给作者点个赞吧～
 
-> 参考文档：
->
-> [this](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/this)
->
-> [箭头函数](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+
+### 参考文档：
+
+1. [this](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/this)
+2. [箭头函数](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 

@@ -134,9 +134,9 @@ func2();//结果显示:num is not defined
 
 
 
-> 参考文章：
->
-> 1. \*\*\*\*[**JavaScript深入之词法作用域和动态作用域**](https://github.com/mqyqingfeng/Blog/issues/3)\*\*\*\*
-> 2. \*\*\*\*[**JavaScript深入之作用域链**](https://github.com/mqyqingfeng/Blog/issues/6)\*\*\*\*
-> 3. \*\*\*\*[**JS-词法作用域 作用域链**](https://www.cnblogs.com/xixiaijunjun/p/10085078.html)\*\*\*\*
+### 参考文章：
+
+1. [**JavaScript深入之词法作用域和动态作用域**](https://github.com/mqyqingfeng/Blog/issues/3)
+2. [**JavaScript深入之作用域链**](https://github.com/mqyqingfeng/Blog/issues/6)
+3. [**JS-词法作用域 作用域链**](https://www.cnblogs.com/xixiaijunjun/p/10085078.html)
 

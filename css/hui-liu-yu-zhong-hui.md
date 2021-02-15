@@ -102,13 +102,13 @@
 
 
 
-  
+
 以上内容参考了下面的资料，如有雷同，那很正常。。\(这句话真不错～\)
 
-参考文档：
+### 参考文档：
 
-1. \*\*\*\*[**回流（reflow）与重绘（repaint）**](https://www.cnblogs.com/dujingjie/p/5784890.html)\*\*\*\*
-2. \*\*\*\*[**你真的了解回流和重绘吗**](https://segmentfault.com/a/1190000017329980)\*\*\*\*
-3. \*\*\*\*[**浏览器的回流与重绘 \(Reflow & Repaint\)**](https://juejin.im/post/5a9923e9518825558251c96a)\*\*\*\*
-4. \*\*\*\*[**回流与重绘：CSS性能让JavaScript变慢？**](https://www.zhangxinxu.com/wordpress/2010/01/%E5%9B%9E%E6%B5%81%E4%B8%8E%E9%87%8D%E7%BB%98%EF%BC%9Acss%E6%80%A7%E8%83%BD%E8%AE%A9javascript%E5%8F%98%E6%85%A2%EF%BC%9F/)\*\*\*\*
+1. [**回流（reflow）与重绘（repaint）**](https://www.cnblogs.com/dujingjie/p/5784890.html)
+2. [**你真的了解回流和重绘吗**](https://segmentfault.com/a/1190000017329980)
+3. [**浏览器的回流与重绘 \(Reflow & Repaint\)**](https://juejin.im/post/5a9923e9518825558251c96a)
+4. [**回流与重绘：CSS性能让JavaScript变慢？**](https://www.zhangxinxu.com/wordpress/2010/01/%E5%9B%9E%E6%B5%81%E4%B8%8E%E9%87%8D%E7%BB%98%EF%BC%9Acss%E6%80%A7%E8%83%BD%E8%AE%A9javascript%E5%8F%98%E6%85%A2%EF%BC%9F/)
 

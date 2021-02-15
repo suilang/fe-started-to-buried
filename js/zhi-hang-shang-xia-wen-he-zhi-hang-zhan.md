@@ -238,9 +238,9 @@ ECStack.pop();
 
 
 
-> 参考文章：
->
-> 1. \*\*\*\*[**JavaScript深入之执行上下文栈**](https://github.com/mqyqingfeng/Blog/issues/4)\*\*\*\*
-> 2. \*\*\*\*[**\[译\] 理解 JavaScript 中的执行上下文和执行栈**](https://juejin.im/post/5ba32171f265da0ab719a6d7)\*\*\*\*
-> 3. \*\*\*\*[**也来谈谈JS的执行上下文与词法环境**](https://blog.csdn.net/Napoleonxxx/article/details/104237439)\*\*\*\*
+### 参考文章：
+
+1. [**JavaScript深入之执行上下文栈**](https://github.com/mqyqingfeng/Blog/issues/4)
+2. [**\[译\] 理解 JavaScript 中的执行上下文和执行栈**](https://juejin.im/post/5ba32171f265da0ab719a6d7)
+3. [**也来谈谈JS的执行上下文与词法环境**](https://blog.csdn.net/Napoleonxxx/article/details/104237439)
 

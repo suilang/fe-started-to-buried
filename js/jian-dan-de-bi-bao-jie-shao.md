@@ -138,7 +138,7 @@ function TodoStore(){
 ```
 
 `TodoStore()` 函数返回了一个拥有私有状态的对象。在外部，我们无法访问私有的 todos 变量，并且 add 和 get 这两个闭包拥有相同的私有状态。在这里，`TodoStore()` 是一个工厂函数。  
-  
+
 
 
 #### 闭包 vs 纯函数
@@ -165,7 +165,7 @@ function TodoStore(){
 
 
 
-> 参考文章：
->
-> [\[译\]发现 JavaScript 中闭包的强大威力](https://juejin.im/post/5c4e6a90e51d4552266576d2)
+### 参考文章：
+
+[\[译\]发现 JavaScript 中闭包的强大威力](https://juejin.im/post/5c4e6a90e51d4552266576d2)
 

@@ -97,7 +97,7 @@ CSS **`position`**属性用于指定一个元素在文档中的定位方式。`t
 
 参考文档：
 
-1. \*\*\*\*[**深入理解position sticky粘性定位的计算规则**](https://www.zhangxinxu.com/wordpress/2020/03/position-sticky-rules/)\*\*\*\*
-2. \*\*\*\*[**position \| MDN**](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position)\*\*\*\*
-3. \*\*\*\*[**杀了个回马枪，还是说说position:sticky吧**](https://www.zhangxinxu.com/wordpress/2018/12/css-position-sticky/)\*\*\*\*
+1. [**深入理解position sticky粘性定位的计算规则**](https://www.zhangxinxu.com/wordpress/2020/03/position-sticky-rules/)
+2. [**position \| MDN**](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position)
+3. [**杀了个回马枪，还是说说position:sticky吧**](https://www.zhangxinxu.com/wordpress/2018/12/css-position-sticky/)
 

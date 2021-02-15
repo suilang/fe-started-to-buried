@@ -13,9 +13,9 @@ JavaScript 是动态的，并且本身不提供一个 `class` 实现。（在 ES
 
 上面的解释可能有些绕，看完下面应该就会清晰一些。
 
-### 基于原型链的继承 <a id="&#x57FA;&#x4E8E;&#x539F;&#x578B;&#x94FE;&#x7684;&#x7EE7;&#x627F;"></a>
+### 基于原型链的继承 
 
-#### 继承属性 <a id="&#x7EE7;&#x627F;&#x5C5E;&#x6027;"></a>
+#### 继承属性 
 
 JavaScript 对象是动态的属性“包”（指其自己的属性）。JavaScript 对象有一个指向一个原型对象的链。当试图访问一个对象的属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象的原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或到达原型链的末尾。
 
@@ -144,12 +144,7 @@ console.log(p.m()); // 5
 > ECMAScript 5 中引入了一个新方法：[`Object.create()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create)。可以调用这个方法来创建一个新对象。新对象的原型就是调用 create 方法时传入的第一个参数：
 
 
+### 参考文档：
 
-> 如果你收获了新知识，请给作者点个赞吧～
-
-
-
-> 参考文档：
->
-> MDN:[继承与原型链](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+MDN:[继承与原型链](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
 

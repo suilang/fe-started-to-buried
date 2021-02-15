@@ -1,4 +1,4 @@
-# 事件机制/
+# 事件机制/EventLoop
 
 javascript是一门**单线程**语言，在最新的HTML5中提出了Web-Worker，但javascript是单线程这一核心仍未改变，不管谁写的代码，都得一句一句的来执行。
 
@@ -383,31 +383,13 @@ process.nextTick(() => {
 **浏览器环境下，microtask的任务队列是每个macrotask执行完之后执行。而在Node.js中，microtask会在事件循环的各个阶段之间执行，也就是一个阶段执行完毕，就会去执行microtask队列的任务。**  
 
 
-  
-  
 
 
+### 参考文章：
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-> 参考文章：
->
-> 1. \*\*\*\*[**这一次，彻底弄懂 JavaScript 执行机制**](https://juejin.im/post/59e85eebf265da430d571f89)\*\*\*\*
-> 2. \*\*\*\*[**从event loop规范探究javaScript异步及浏览器更新渲染时机**](https://github.com/aooy/blog/issues/5)\*\*\*\*
-> 3. \*\*\*\*[**彻底吃透 JavaScript 执行机制**](https://juejin.im/post/5d901418518825539312f587)\*\*\*\*
+1. [**这一次，彻底弄懂 JavaScript 执行机制**](https://juejin.im/post/59e85eebf265da430d571f89)
+2. [**从event loop规范探究javaScript异步及浏览器更新渲染时机**](https://github.com/aooy/blog/issues/5)
+3. [**彻底吃透 JavaScript 执行机制**](https://juejin.im/post/5d901418518825539312f587)
 
 
 

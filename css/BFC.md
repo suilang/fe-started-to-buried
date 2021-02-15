@@ -465,7 +465,7 @@ ps：我一般使用`display: flwx`，然后左侧宽度固定，右侧设置`fl
 
 好了，外边距重叠、BFC、及浮动的讲解到此结束。有任何想法和意见欢迎在评论中指出。
 
-参考文档：
+### 参考文档：
 1. [什么是BFC？看这一篇就够了](https://blog.csdn.net/sinat_36422236/article/details/88763187)
 2. [10 分钟理解 BFC 原理](https://zhuanlan.zhihu.com/p/25321647)
 3. [CSS中重要的BFC](https://segmentfault.com/a/1190000013023485)

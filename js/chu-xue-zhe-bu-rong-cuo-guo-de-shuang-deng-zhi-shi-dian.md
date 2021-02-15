@@ -65,13 +65,13 @@ ECMAS实现双等的抽象比较的逻辑如下：
    c. Type\(x\) 为 number，则
 
        i. x 为NaN，返回false 
-
+    
        ii. y 为NaN，返回false 
-
+    
        iii. x 与 y的值相等，返回 true
-
+    
        iv. x = +0, y = - 0, 返回true
-
+    
        v. 返回 false
 
    d. 如果 Type\(x\) 为 string, y 为与 x 一致的字符串，返回 true， 否则返回 false
@@ -131,21 +131,10 @@ console.log(obj == undefined);
 
 有些开发者认为，最好永远都不要使用相等操作符。全等操作符的结果更容易预测，并且因为没有隐式转换，全等比较的操作会更快。
 
-
-
 > 小知识：`Object.is(a,b)`判断a与b是否完全相等，与===基本相同，不同点在于Object.is判断`+0不等于-0`，`NaN等于自身`
 
-
-
-\`\`
-
-如果你收获了新的知识，请给作者点个赞吧～
-
-
-
-> 参考文档
->
-> [JavaScript 中的相等性判断](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Equality_comparisons_and_sameness)
+### 参考文档
+1. [JavaScript 中的相等性判断](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Equality_comparisons_and_sameness)
 
   
 

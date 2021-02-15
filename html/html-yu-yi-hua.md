@@ -252,13 +252,9 @@ The <abbr title="People's Republic of China">PRC</abbr> was founded in 1949.
 
 
 
+### 参考文档：
 
+1. html语义元素：[https://www.w3school.com.cn/html/html5\_semantic\_elements.asp](https://www.w3school.com.cn/html/html5_semantic_elements.asp)
 
-
-
-参考文档：
-
-> html语义元素：[https://www.w3school.com.cn/html/html5\_semantic\_elements.asp](https://www.w3school.com.cn/html/html5_semantic_elements.asp)
->
-> html语义化标签： [https://blog.csdn.net/qq\_38128179/java/article/details/80811339](https://blog.csdn.net/qq_38128179/java/article/details/80811339)
+2. html语义化标签： [https://blog.csdn.net/qq\_38128179/java/article/details/80811339](https://blog.csdn.net/qq_38128179/java/article/details/80811339)
 
