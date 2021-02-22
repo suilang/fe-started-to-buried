@@ -31,45 +31,32 @@
 
 - [重新介绍javascript--类型](js/zhong-xin-jie-shao-javascript-lei-xing.md)  
     JavaScript 是一种**弱类型**或者说**动态**语言。这意味着你不用提前声明变量的类型，在程序运行过程中，类型会被自动确定。
-
 - [初学者不容错过的双等\(==\)知识点](js/chu-xue-zhe-bu-rong-cuo-guo-de-shuang-deng-zhi-shi-dian.md)  
     问：2 == true 返回什么？ 答：false
-
 - [clone：你是浅还是深](js/clone.md)  
     **知识点1**: 基本数据类型不是全存在栈中，只有直接声明的变量才会在栈中。
     **知识点2**: 位于引用类型内的基本类型，也是放在堆上
-    
 - [继承与原型链](js/ji-cheng-yu-yuan-xing.md)  
     JavaScript 是动态的，并且本身不提供一个 `class` 实现。在 ES2015/ES6 中引入了 `class` 关键字，但那只是语法糖，JavaScript 仍然是基于原型的。不断向上追溯的原型共同组成了原型链
-    
 - [this及箭头函数](js/this.md)  
     如果你猜到我指向哪，我就让你嘿嘿嘿～
-    
 - [apply、call、bind的区别与精简实现](js/apply、call、bind.md)  
     箭头函数永不为奴
-    
 - [你所不知道的变量提升](js/bian-liang-ti-sheng.md)  
     `let / const` **也有变量提升** ，这也是暂时性死区的由来。
-    
 - [执行上下文和执行栈](js/zhi-hang-shang-xia-wen-he-zhi-hang-zhan.md)  
     执行上下文是评估和执行 JavaScript 代码的环境的抽象概念。Javascript 代码都是在执行上下文中运行。
-    
 - [词法作用域及作用域链](js/ci-fa-zuo-yong-yu-ji-zuo-yong-yu-lian.md)  
-
 - [简单的闭包介绍](js/jian-dan-de-bi-bao-jie-shao.md)  
     三百字的讲解与五百字的应用
-    
 - [事件机制](js/shi-jian-ji-zhi.md)  
-
 - [函数式编程](js/han-shu-shi-bian-cheng.md)  
     函数式编程的思维过程是完全不同的，它的着眼点是**函数**，而不是**过程**，它强调的是如何通过函数的组合变换去解决问题，而不是我通过写什么样的语句去解决问题。
-    
 - [web worker详解](js/web-worker.md)  
     Web Worker为Web内容在后台线程中运行脚本提供了一种简单的方法。线程可以执行任务而不干扰用户界面。
-
 - [遇见Blob](js/Blob.md)  
     Blob 对象表示一个不可变、原始数据的类文件对象。Blob 表示的不一定是JavaScript原生格式的数据。File 接口基于Blob，继承了 blob 的功能并将其扩展使其支持用户系统上的文件。
-    
+- [Promise实现及讲解](js/Promise.md)
 
 
 ### css
@@ -100,7 +87,7 @@
   
 ### 工程化
 
-- [带你撸个属于自己的react项目|webpack+babel+typescript+eslint](工程化/随手 建一个属于自己的项目.md)  
+- [带你撸个属于自己的react项目|webpack+babel+typescript+eslint](工程化/随手建一个属于自己的项目.md)  
 
 - [前端模块化](工程化/前端模块化.md)  
 
