@@ -541,6 +541,48 @@ finally = (callback) => {
 }
 ```
 
+
+
+## 关联问题
+
+**实现Ajax并发请求控制**  
+
+解决方案：通过while循环控制最大并发数，利用递归使任务持续执行。
+
+```
+function multiRequest(urls = [], maxNum) {
+  // 请求总数量
+  const len = urls.length;
+  // 根据请求数量创建一个数组来保存请求的结果
+  const result = new Array(len).fill(false);
+  let index = 0;
+  function next() {
+    new Promise((resolve, reject) => {
+      const current = index;
+      const url = urls[index];
+      index++;
+      // 模拟网络请求
+      setTimeout(()=>{
+        result[current] = url;
+        resolve(url)
+      }, 1000);
+    }).then((data) => {
+      console.log('完成任务->', data);
+      if (index < len) {
+        // 利用递归控制任务持续执行
+        next();
+      }
+    });
+  }
+
+  while (maxNum) {
+    next();
+    maxNum -= 1;
+  }
+}
+multiRequest([1,2,3,4,5],2)
+```
+
 ##  补充知识
 
 ### Promise/A+ 规范
