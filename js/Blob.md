@@ -127,11 +127,11 @@ const blobContent = new Blob(
 // 构建下载链接
 const blobUrl = window.URL.createObjectURL(blobContent)
 
-const lnk = document.createElement('a')
+const link = document.createElement('a')
 link.download = filename
 link.href = blobUrl
 // 触发点击
-eleLink.click()
+link.click()
 ```
 
 > 当你结束使用某个 URL 对象之后，应该通过调用`URL.revokeObjectURL()`这个方法来让浏览器知道不用在内存中继续保留对这个文件的引用了。

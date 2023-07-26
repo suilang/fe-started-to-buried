@@ -248,7 +248,7 @@ foo;
 null
 ```
 
-#### `null` 与 `undefined` 的不同点： <a id="null_&#x4E0E;_undefined_&#x7684;&#x4E0D;&#x540C;&#x70B9;&#xFF1A;"></a>
+#### `null` 与 `undefined` 的不同点：
 
 当检测 `null` 或 `undefined` 时，注意[相等（==）与全等（===）两个操作符的区别](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators) ，前者会执行类型转换：
 
