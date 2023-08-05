@@ -14,12 +14,12 @@ const config = {
   url: 'https://suilang.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/fe-started-to-buried',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'suilang', // Usually your GitHub org/user name.
-  projectName: 'fe-started-to-buried', // Usually your repo name.
+  projectName: 'suilang.github.io', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -39,10 +39,11 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          breadcrumbs: false,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/suilang/fe-started-to-buried/blob/docusaurus/',
         },
         // blog: {
         //   showReadingTime: true,
@@ -78,7 +79,7 @@ const config = {
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/suilang/fe-started-to-buried.git',
             label: 'GitHub',
             position: 'right',
           },
