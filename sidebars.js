@@ -45,7 +45,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'CSS',
-      items: ['CSS/index', 'CSS/create-css'],
+      items: ['CSS/index', 'CSS/create-css', 'CSS/position', 'CSS/css-bu-ju', 'CSS/css-bai-fen-bi','CSS/SassVsLess'],
     },
   ],
 };
