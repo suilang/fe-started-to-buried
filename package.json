@@ -12,7 +12,8 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "deploy-master": "GIT_USER=suilang USE_SSH=true DEPLOYMENT_BRANCH=master yarn deploy"
   },
   "dependencies": {
     "@docusaurus/core": "2.4.1",
