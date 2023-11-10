@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
 const OnlineStatus = () => {
   const [isOnline, setIsOnline] = useState(() => {
     return navigator.onLine;
@@ -104,4 +106,8 @@ const OnlineStatus = () => {
     </div>
   );
 };
-export default OnlineStatus;
+
+const wrap = () => {
+  return <BrowserOnly>{() => <OnlineStatus />}</BrowserOnly>;
+};
+export default wrap;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { message } from 'antd';
 import { checkNetworkStatus } from '../../utils/checkNetworkStatus';
+import BrowserWrap from '../BrowserWrap';
 const CheckInnerStatus = ({ url = 'https://www.baidu.com' }: { url?: string }) => {
   const onClick = async () => {
     const rs = await checkNetworkStatus(url);
@@ -37,4 +38,4 @@ const CheckInnerStatus = ({ url = 'https://www.baidu.com' }: { url?: string }) =
     </div>
   );
 };
-export default CheckInnerStatus;
+export default BrowserWrap(CheckInnerStatus);

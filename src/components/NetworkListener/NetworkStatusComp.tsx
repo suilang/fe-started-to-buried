@@ -1,3 +1,4 @@
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import { checkNetworkStatus } from '@site/src/utils/checkNetworkStatus';
 import React, { useEffect, useState } from 'react';
 function NetworkStatusComp() {
@@ -6,11 +7,6 @@ function NetworkStatusComp() {
   });
 
   const handleNetworkChange = async () => {
-    if (!navigator.onLine) {
-      setNetworkStatus(false);
-      return;
-    }
-
     const rs = await checkNetworkStatus();
     setNetworkStatus(rs);
   };
@@ -32,4 +28,7 @@ function NetworkStatusComp() {
   }, []);
   return <div> 网络状态：{networkStatus ? '在线' : '离线'} </div>;
 }
-export default NetworkStatusComp;
+const wrap = () => {
+  return <BrowserOnly>{() => <NetworkStatusComp />}</BrowserOnly>;
+};
+export default wrap;

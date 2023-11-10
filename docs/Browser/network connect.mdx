@@ -155,7 +155,7 @@ async function checkInnerStatus() {
 1. 监听`navigator.onLine`和`navigator.connection`的变更事件，回调函数使用同一函数。
 2. 此时`navigator.onLine`为 false，则断定网络断开。
 3. 此时`navigator.onLine`返回 true，则进行下一步验证。
-4. 发起`checkNetworkStatus`请求，判断网络状态，并更新状态变量。
+4. 指定`url`发起请求，判断网络状态，并更新状态变量。
 5. 依据业务不同，定时执行步骤一中的回调函数。
 
 对应代码示例如下：
@@ -167,11 +167,6 @@ function NetworkStatusComp() {
   });
 
   const handleNetworkChange = async () => {
-    if (!navigator.onLine) {
-      setNetworkStatus(false);
-      return;
-    }
-
     const rs = await checkNetworkStatus();
     setNetworkStatus(rs);
   };
