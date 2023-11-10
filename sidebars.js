@@ -47,6 +47,11 @@ const sidebars = {
       label: 'CSS',
       items: ['CSS/index', 'CSS/create-css', 'CSS/position', 'CSS/css-bu-ju', 'CSS/css-bai-fen-bi','CSS/SassVsLess'],
     },
+    {
+      type: 'category',
+      label: 'Browser',
+      items: ['Browser/network connect'],
+    },
   ],
 };
 

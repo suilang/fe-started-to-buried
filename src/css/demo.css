@@ -1,0 +1,8 @@
+.base-demo-wrap {
+  border: '1px solid #dee0e3';
+  padding: '24px';
+  border-radius: 4;
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'center';
+}
