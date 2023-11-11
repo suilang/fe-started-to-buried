@@ -75,7 +75,7 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Docs',
+            label: '前端',
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
@@ -86,6 +86,11 @@ const config = {
           {
             href: 'https://github.com/suilang/fe-started-to-buried.git',
             label: 'GitHub',
+            position: 'right',
+          },
+          {
+            href: 'https://juejin.cn/user/536217407721965/posts',
+            label: 'Juejin',
             position: 'right',
           },
         ],

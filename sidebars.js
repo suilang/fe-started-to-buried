@@ -52,6 +52,16 @@ const sidebars = {
       label: 'Browser',
       items: ['Browser/network connect'],
     },
+    {
+      type: 'category',
+      label: '工程化',
+      items: ['Engineering/intro', 'Engineering/Module'],
+    },
+    {
+      type: 'category',
+      label: 'Yarn',
+      items: ['Yarn/ErrorHelp'],
+    },
   ],
 };
 

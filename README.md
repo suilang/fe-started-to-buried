@@ -1,41 +1,13 @@
-# Website
+# 写在前面
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+这是一项从零开始的整理计划，也是我的个人笔记。
 
-### Installation
+仓库名称，可以写作「从入门到入土」。
 
-```
-$ yarn
-```
+希望`star`一下支持作者，关注后续的更新。非常感谢～
 
-### Local Development
+---
 
-```
-$ yarn start
-```
+文档地址： https://suilang.github.io/docs/intro
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+博客地址： https://juejin.cn/user/536217407721965/posts
