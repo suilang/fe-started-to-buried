@@ -79,6 +79,11 @@ const config = {
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
+            html: `<img src="https://img.shields.io/github/stars/suilang/fe-started-to-buried?style=social" style="margin-top: 8px"/>`,
+            href: 'https://github.com/suilang/fe-started-to-buried',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/suilang/fe-started-to-buried.git',
             label: 'GitHub',
             position: 'right',
@@ -87,48 +92,48 @@ const config = {
       },
       footer: {
         style: 'dark',
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/intro',
-              },
-            ],
-          },
-          // {
-          //   title: 'Community',
-          //   items: [
-          //     {
-          //       label: 'Stack Overflow',
-          //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-          //     },
-          //     {
-          //       label: 'Discord',
-          //       href: 'https://discordapp.com/invite/docusaurus',
-          //     },
-          //     {
-          //       label: 'Twitter',
-          //       href: 'https://twitter.com/docusaurus',
-          //     },
-          //   ],
-          // },
-          // {
-          //   title: 'More',
-          //   items: [
-          //     {
-          //       label: 'Blog',
-          //       to: '/blog',
-          //     },
-          //     {
-          //       label: 'GitHub',
-          //       href: 'https://github.com/facebook/docusaurus',
-          //     },
-          //   ],
-          // },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        // links: [
+        //   {
+        //     title: 'Docs',
+        //     items: [
+        //       {
+        //         label: 'Tutorial',
+        //         to: '/docs/intro',
+        //       },
+        //     ],
+        //   },
+        //   // {
+        //   //   title: 'Community',
+        //   //   items: [
+        //   //     {
+        //   //       label: 'Stack Overflow',
+        //   //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+        //   //     },
+        //   //     {
+        //   //       label: 'Discord',
+        //   //       href: 'https://discordapp.com/invite/docusaurus',
+        //   //     },
+        //   //     {
+        //   //       label: 'Twitter',
+        //   //       href: 'https://twitter.com/docusaurus',
+        //   //     },
+        //   //   ],
+        //   // },
+        //   // {
+        //   //   title: 'More',
+        //   //   items: [
+        //   //     {
+        //   //       label: 'Blog',
+        //   //       to: '/blog',
+        //   //     },
+        //   //     {
+        //   //       label: 'GitHub',
+        //   //       href: 'https://github.com/facebook/docusaurus',
+        //   //     },
+        //   //   ],
+        //   // },
+        // ],
+        copyright: `Copyright © ${new Date().getFullYear()} FE STARTED TO BURIED, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
