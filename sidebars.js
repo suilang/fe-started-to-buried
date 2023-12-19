@@ -50,7 +50,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Browser',
-      items: ['Browser/network connect'],
+      items: ['Browser/network connect', 'Browser/Selection',`Browser/referer`],
     },
     {
       type: 'category',
