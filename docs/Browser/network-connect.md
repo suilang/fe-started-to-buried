@@ -1,7 +1,3 @@
-import OnlineStatus from '@site/src/components/NetworkListener';
-import CheckNetworkStatus from '@site/src/components/NetworkListener/CheckNetworkStatus';
-import NetworkStatusComp from '@site/src/components/NetworkListener/NetworkStatusComp';
-
 # 浏览器网络可用状态
 
 ## 概览
@@ -16,7 +12,7 @@ import NetworkStatusComp from '@site/src/components/NetworkListener/NetworkStatu
 
 调用该属性会返回浏览器的在线状态，是一个布尔值， `true`表示在线，`false`表示离线。只要浏览器连接网络的能力发生变化，该属性就会发送更新。
 
-在 Chrome 和 Safari 中，如果浏览器无法连接到局域网 (LAN) 或路由器，则表示浏览器处于离线状态，返回`false`，其他所有场景，都返回`true`。所以如果返回`false`，则可以断定浏览器处于离线状态。但如果返回`true`，并不意味着浏览器可以访问互联网。例如计算机运行的虚拟化软件具有始终“连接”的虚拟以太网适配器。
+在 Chrome 和 Safari 中，如果浏览器无法连接到局域网 (LAN) 或路由器，则表示浏览器处于离线状态，返回`false`，其他所有场景，都返回`true`。所以如果返回`false`，则可以断定浏览器处于离线状态。但如果返回`true`，并不意味着浏览器可以访问互联网。例如计算机运行的虚拟化软件具有始终"连接"的虚拟以太网适配器。
 
 我们可以通过监听该属性的变化来检测网络连接状态。
 
@@ -98,7 +94,89 @@ if (navigator.connection) {
 
 > 偶发rtt识别错误，未查明原因。
 
-<OnlineStatus />
+以下是一个完整的 React 组件示例，用于实时显示网络状态：
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+function OnlineStatus() {
+  const [isOnline, setIsOnline] = useState(() => {
+    return navigator.onLine;
+  });
+
+  const [connect, setConnect] = useState({
+    downlink: 0,
+    effectiveType: '',
+    rtt: 0,
+  });
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!navigator.connection) {
+      return () => {};
+    }
+    function handleConnectionChange() {
+      const connection = navigator.connection;
+      setConnect({
+        downlink: connection.downlink,
+        effectiveType: connection.effectiveType,
+        rtt: connection.rtt,
+      });
+    }
+
+    navigator.connection.addEventListener('change', handleConnectionChange);
+    return () => {
+      navigator.connection.removeEventListener('change', handleConnectionChange);
+    };
+  }, []);
+
+  return (
+    <div style={{ border: '1px solid #dee0e3', padding: '24px', borderRadius: 4 }}>
+      <div style={{ borderBottom: '1px solid #dee0e3', paddingBottom: 12, marginBottom: 12 }}>
+        <span>当前页面的网络状态为:</span>
+        <span style={{
+          padding: '4px',
+          borderRadius: 4,
+          background: isOnline ? 'green' : 'red',
+          marginLeft: 8,
+          color: '#fff',
+        }}>
+          {isOnline ? '网络已连接' : '网络已断开'}
+        </span>
+      </div>
+      {connect.effectiveType ? (
+        <>
+          <div>当前网络连接状态：</div>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '12px 24px',
+            background: '#f1f1f1',
+            borderRadius: 4,
+            color: '#999999',
+          }}>
+            <span>effectiveType: {connect.effectiveType}</span>
+            <span>rtt: {connect.rtt}</span>
+            <span>downlink: {connect.downlink}</span>
+          </div>
+        </>
+      ) : (
+        <div>浏览器不支持navigator.connection属性</div>
+      )}
+    </div>
+  );
+}
+```
 
 ## 判断网络是否可用
 
@@ -107,28 +185,68 @@ if (navigator.connection) {
 以下是一个使用`navigator.onLine`和主动发起网络请求的方式，判断网络是否正常的函数的示例。这个函数首先会检查`navigator.onLine`的值，如果这个值为`false`，那么函数会立即返回网络不可用。如果这个值为`true`，函数会进一步发起一个网络请求以验证网络是否真的可用。
 
 ```js
+/**
+ * 使用`navigator.onLine`和主动发起网络请求的方式，判断网络是否正常
+ * 这个函数首先会检查`navigator.onLine`的值，如果这个值为`false`，那么函数会立即返回网络不可用。
+ * 如果这个值为`true`，函数会进一步发起一个网络请求以验证网络是否真的可用。
+ * @param url
+ * @returns
+ */
 export function checkNetworkStatus(url = 'https://www.baidu.com') {
-  return (
-    new Promise() <
-    boolean >
-    ((resolve) => {
-      if (!navigator.onLine) {
-        resolve(false);
-        return;
-      }
-      fetch(url, {
-        mode: 'no-cors',
-      })
-        .then(() => {
-          resolve(true);
-        })
-        .catch((error) => resolve(false));
+  return new Promise<boolean>((resolve) => {
+    if (!navigator.onLine) {
+      resolve(false);
+      return;
+    }
+    fetch(url, {
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/html; charset=utf-8' },
     })
-  );
+      .then(() => {
+        resolve(true);
+      })
+      .catch((error) => resolve(false));
+  });
 }
 ```
 
-<CheckNetworkStatus />
+以下是一个使用该函数的 React 组件示例：
+
+```jsx
+import React from 'react';
+import { checkNetworkStatus } from './checkNetworkStatus';
+
+function CheckNetworkStatus({ url = 'https://www.baidu.com' }) {
+  const onClick = async () => {
+    const rs = await checkNetworkStatus(url);
+    alert(rs ? '网络连接正常' : '网络连接异常');
+  };
+
+  return (
+    <div style={{
+      border: '1px solid #dee0e3',
+      padding: '24px',
+      borderRadius: 4,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+      <div
+        onClick={onClick}
+        style={{
+          padding: '4px 12px',
+          borderRadius: '8px',
+          background: '#00aa00',
+          color: '#fff',
+          cursor: 'pointer',
+        }}
+      >
+        检查网络
+      </div>
+    </div>
+  );
+}
+```
 
 ## 判断是否是内网
 
@@ -146,6 +264,49 @@ async function checkInnerStatus() {
 }
 ```
 
+以下是一个完整的检查内网状态的 React 组件示例：
+
+```jsx
+import React from 'react';
+import { checkNetworkStatus } from './checkNetworkStatus';
+
+function CheckInnerStatus({ url = 'https://www.baidu.com' }) {
+  const onClick = async () => {
+    const rs = await checkNetworkStatus(url);
+    if (!rs) {
+      alert('网络连接异常');
+      return;
+    }
+    const inner = await checkNetworkStatus('http://erp.jd.com');
+    alert(inner ? '内部网络连接正常' : '内部网络连接异常');
+  };
+
+  return (
+    <div style={{
+      border: '1px solid #dee0e3',
+      padding: '24px',
+      borderRadius: 4,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+      <div
+        onClick={onClick}
+        style={{
+          padding: '4px 12px',
+          borderRadius: '8px',
+          background: '#00aa00',
+          color: '#fff',
+          cursor: 'pointer',
+        }}
+      >
+        检查网络
+      </div>
+    </div>
+  );
+}
+```
+
 通常，内网一般是`http`协议的，在进行判断的时候，如果当前页面是`https`，需要注意浏览器的同源限制，防止误判。
 
 ## 常态化监听
@@ -160,7 +321,10 @@ async function checkInnerStatus() {
 
 对应代码示例如下：
 
-```js
+```jsx
+import React, { useState, useEffect } from 'react';
+import { checkNetworkStatus } from './checkNetworkStatus';
+
 function NetworkStatusComp() {
   const [networkStatus, setNetworkStatus] = useState(() => {
     return navigator.onLine;
@@ -178,7 +342,7 @@ function NetworkStatusComp() {
     navigator.connection?.addEventListener('change', handleNetworkChange);
 
     // 定时检查网络状态
-    const intervalId = setInterval(checkNetworkStatus, 30000);
+    const intervalId = setInterval(handleNetworkChange, 30000);
     return () => {
       window.removeEventListener('online', handleNetworkChange);
       window.removeEventListener('offline', handleNetworkChange);
@@ -186,6 +350,7 @@ function NetworkStatusComp() {
       clearInterval(intervalId);
     };
   }, []);
+
   return <div> 网络状态：{networkStatus ? '在线' : '离线'} </div>;
 }
 ```
