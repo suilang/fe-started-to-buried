@@ -17,10 +17,7 @@
       --theme-color-dark: #2d8060;
     }
     
-    .sidebar-nav > ul > li > p {
-      font-weight: 600;
-      font-size: 1.1em;
-    }
+
     
     .markdown-section code {
       background-color: #f8f8f8;
@@ -33,6 +30,8 @@
       padding: 16px;
       border-radius: 6px;
     }
+    
+
   </style>
 </head>
 <body>
@@ -91,12 +90,17 @@
       
       // Other settings
       auto2top: true,
-      subMaxLevel: 3,
       coverpage: false,
       
       // Router mode
-      routerMode: 'hash'
+      routerMode: 'hash',
+      
+      // Sidebar collapse
+      sidebarDisplayLevel: 0
     }
   </script>
+  
+  <!-- Sidebar collapse plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
 </body>
 </html>

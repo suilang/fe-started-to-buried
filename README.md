@@ -24,7 +24,7 @@
 ## 链接
 
 - 文档地址：https://suilang.github.io
-- GitHub：https://github.com/suilang/fe-started-to-buried
+- GitHub：https://github.com/suilang/fe-buried
 - 博客地址：https://juejin.cn/user/536217407721965/posts
 
 ---
